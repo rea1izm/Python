@@ -11,8 +11,6 @@ while answer == 0:
         if answer > 0:
             print( answer**2 )
             break
-    else:
-        answer = 0
     answer = 0
     print('Вы ввели неверные данные, попробуйте еще раз.')
 
