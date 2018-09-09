@@ -89,3 +89,31 @@ else:
 #
 # Вход: 11
 # Выход: 5 3
+
+block_rooms = []
+repiter = 0
+position = 0
+srch_floor = 1 # искомый этаж
+a = 0 # счетчик
+block_floor = 1 # блок этажей
+n_room = 1
+srch_room = int(input('Введите номер комнаты: '))
+while position == 0:
+    if a < block_floor:
+        block_rooms.append(n_room)
+        n_room += 1
+        a += 1
+    else:
+        if srch_room in block_rooms:
+            position = block_rooms.index(srch_room)+1
+            print('Этаж: ', srch_floor)
+            print('Порядковый номер слева: ', position)
+            break
+        else:
+            block_rooms.clear()
+            a = 0
+            srch_floor += 1
+            repiter += 1
+            if repiter == block_floor:
+                block_floor += 1
+                repiter = 0
