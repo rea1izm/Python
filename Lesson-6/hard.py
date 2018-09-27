@@ -31,36 +31,47 @@ toy = Factory('Медведь', 'бурый', 'animal')
 # Доработайте нашу фабрику, создайте по одному классу на каждый тип, теперь надо в классе фабрика
 # исходя из типа игрушки отдавать конкретный объект класса, который наследуется от базового - Игрушка
 
-
-class FactoryToys:
+class Toy:
 
 	def __init__(self, name, color):
 		self.name = name
 		self.color = color
 
-	def buy_stuff(self):
+
+class AnimalToy(Toy):
+
+	def __init__(self, name, color):
+		super().__init__(name, color)
+		self.type = 'Животное'
+
+
+class Cartoon(Toy):
+
+	def __init__(self, name, color):
+		super().__init__(name, color)
+		self.type = 'Мультфильм'
+
+
+class FactoryToys:
+
+	def toy_create(self, name, color, toy_type):
+		self._buy_stuff()
+		self._making_toy()
+		self._painting()
+		if toy_type == 'Животное':
+			return AnimalToy(name, color)
+		elif toy_type == 'Мультфильм':
+			return Cartoon(name, color)
+
+	def _buy_stuff(self):
 		print('Закупаем материал для изготовления игрушек.')
 
-	def making_toy(self):
+	def _making_toy(self):
 		print('Идет производство игрушек.')
 
-	def painting(self):
+	def _painting(self):
 		print('Запущен процесс окраски изделий')
 
 
-class AnimalToys(FactoryToys):
-
-	def __init__(self, name, color):
-		super().__init__(name, color)
-		self.type = 'Animal'
-
-
-class CartoonHeroes(FactoryToys):
-
-	def __init__(self, name, color):
-		super().__init__(name, color)
-		self.type = 'Cartoon Heroes'
-
-
-wolf = AnimalToys('Волчара', 'Серый')
-mouse = CartoonHeroes('Мышонок Джери', 'Желтый')
+fabrika = FactoryToys()
+fabrika.toy_create('Медведь', 'Бурый', 'Животное')
